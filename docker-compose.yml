@@ -1,0 +1,24 @@
+version: '2'
+services:
+  web:
+    build: .
+    #command: node ./server.js
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: f8cad56fa9
+      MYSQL_DATABASE: product
+      MYSQL_USER: root
+      MYSQL_PASSWORD: f8cad56fa9
+      #socketPath: '/var/run/mysqld/mysqld.sock'
+    ports:
+      - "3306:3306"
